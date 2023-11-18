@@ -23,8 +23,4 @@ Dependencies
     Python 3.x
     Python Libraries: numpy, pandas, matplotlib
 
-Author
-
-NoMiko
-
 Feel free to explore and experiment with the code to gain a better understanding of the linear regression process and its application in predicting car prices.
