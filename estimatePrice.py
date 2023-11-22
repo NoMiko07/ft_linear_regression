@@ -2,10 +2,10 @@ import numpy as np
 import pandas as pd
 from dataSetClass import DataSet
 import glob
-from utils import estimatePrice, normalizeThisValue, createThetasCSV
+from utils import estimatePrice
 
 def getThetas():
-    thetasData = np.array([[0.0],[0.0]])
+    thetasData = np.zeros((2, 1))
     filenames = glob.glob('*.csv')
     if "thetas.csv" not in filenames:
         print("Warning: thetas.csv is not created yet !")
@@ -30,7 +30,7 @@ def	main():
             print("Error: mileage can't be under 0!")
         else:
             estimated_price = estimatePrice(user_input, newdata.x_minMax, newdata.y_minMax, thetas)
-            if estimated_price <= 0:
+            if estimated_price < 0:
                 print("The estimated price is negative, due to an excessively high mileage.")
             else:
                 print(f"Estimated price for {user_input} mileage: {estimated_price:.2f}")
