@@ -23,4 +23,5 @@ class DataSet:
         self.x_minMax[1] = self.mileages.max()
         self.y_minMax[0] = self.prices.min()
         self.y_minMax[1] = self.prices.max()
-        self.X = np.hstack((self.xScaled["scaled_data"], np.ones_like(self.xScaled["scaled_data"])))
+        self.thetas = np.zeros((2, 1))
+        self.X = np.hstack((self.xScaled["scaled_data"], np.ones_like(self.xScaled["scaled_data"])))       

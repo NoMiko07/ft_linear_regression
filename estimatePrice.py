@@ -20,16 +20,16 @@ def getThetas():
 
 def	main():
     
-    thetas = getThetas()
     newdata = DataSet()
     newdata.initialize_data()
+    newdata.thetas = getThetas()
     
     try:
         user_input = int(input("Please type a mileage : "))
         if user_input < 0:
             print("Error: mileage can't be under 0!")
         else:
-            estimated_price = estimatePrice(user_input, newdata.x_minMax, newdata.y_minMax, thetas)
+            estimated_price = estimatePrice(user_input, newdata.x_minMax, newdata.y_minMax, newdata.thetas)
             if estimated_price < 0:
                 print("The estimated price is negative, due to an excessively high mileage.")
             else:

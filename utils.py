@@ -83,7 +83,6 @@ def estimatePrice(mileage, minMaxMileage, minMaxPrice, thetas):
     if thetas[0] == 0:
         return 0
     normalized_mileage  = normalizeThisValue(mileage, minMaxMileage) * thetas[0] + thetas[1]
-    print(normalized_mileage)
     estimated_price = normalized_mileage * (minMaxPrice[1] - minMaxPrice[0]) + minMaxPrice[0]
     return float(estimated_price[0])
 

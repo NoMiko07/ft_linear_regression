@@ -84,12 +84,11 @@ def coef_determination(y, prediction):
     return 1 - (u/v)
 
 def	main():
-    learning_rate = 0.1
-    n_iterations = 700
+    learning_rate = 0.3
+    n_iterations = 1000
     newdata = DataSet()
     newdata.initialize_data()
-    theta = np.zeros((2, 1))
-    newdata.thetas, cost_history = grad_descent(newdata.X, newdata.yScaled["scaled_data"], theta, learning_rate, n_iterations)
+    newdata.thetas, cost_history = grad_descent(newdata.X, newdata.yScaled["scaled_data"], newdata.thetas, learning_rate, n_iterations)
     createThetasCSV(newdata.thetas)
     prediction = model(newdata.X, newdata.thetas)
     prediction = denormalizeData(prediction, newdata.yScaled['scaler'])
