@@ -1,7 +1,7 @@
 import numpy as np
 from dataSetClass import DataSet
 from utils import denormalizeData, createThetasCSV
-from graph import showLinearReg, showCostHistory
+from graph import showLinearReg, showCostHistory, showLinearRegProgression
 
 def model(X, theta):
     """
@@ -60,13 +60,17 @@ def grad_descent(X, y, theta, learning_rate, n_iterations):
     - n_iterations (int): Number of iterations for gradient descent.
 
     Returns:
-    - tuple: Final coefficient vector and an array containing the cost history.
+    - tuple: Final coefficient vector, an array containing the cost history and a list that contain the thetas' history.
     """
+    theta_history = []
+    theta_history.append(theta.copy()) 
     cost_history = np.zeros(n_iterations)
     for i in range(0, n_iterations):
+        theta_history.append(theta.copy()) 
         theta =  theta - learning_rate * grad(X, y, theta)
         cost_history[i] = cost_function(X, y, theta)
-    return theta, cost_history
+
+    return theta, cost_history, theta_history
 
 def coef_determination(y, prediction):
     """
@@ -88,12 +92,13 @@ def	main():
     n_iterations = 1000
     newdata = DataSet()
     newdata.initialize_data()
-    newdata.thetas, cost_history = grad_descent(newdata.X, newdata.yScaled["scaled_data"], newdata.thetas, learning_rate, n_iterations)
+    newdata.thetas, cost_history, thetas_history = grad_descent(newdata.X, newdata.yScaled["scaled_data"], newdata.thetas, learning_rate, n_iterations)
     createThetasCSV(newdata.thetas)
     prediction = model(newdata.X, newdata.thetas)
     prediction = denormalizeData(prediction, newdata.yScaled['scaler'])
-    showLinearReg(newdata.mileages, newdata.prices, prediction)
-    showCostHistory(cost_history, n_iterations)
+    #showLinearReg(newdata.mileages, newdata.prices, prediction)
+    #showCostHistory(cost_history, n_iterations)
+    #showLinearRegProgression(newdata, thetas_history)
     coef = coef_determination(newdata.prices, prediction) * 100
     print(f"The precision of my algorithm is {coef:.2f}%")
        
